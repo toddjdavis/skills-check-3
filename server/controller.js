@@ -40,8 +40,20 @@ module.exports = {
     },
     createPost: async (req, res) => {
         const db = req.app.get('db')
-        const {title, body, image_url} = req.body
+        const {title, body, image_url, username} = req.body
         const {user_id} = req.params
-        let newPost = db.add_post(title, body, image_url, user_id)
+        let newPost = await db.add_post(title, body, image_url, user_id, username)
+        res.status(200).send(newPost)
+    },
+    searchPost: async (req,res) => {
+        const db = req.app.get('db')
+        const {post_id} = req.params
+        let selectedPost = await db.get_post(post_id)
+        res.status(200).send(selectedPost)
+    },
+    getAllPost: async (req, res) => {
+        const db = req.app.get('db')
+        let all = await db.all_posts()
+        res.status(200).send(all)
     }
 }

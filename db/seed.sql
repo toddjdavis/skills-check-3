@@ -9,5 +9,6 @@ post_id serial primary key,
 title varchar(50),
 body varchar(500),
 image_url TEXT,
-user_id int REFERENCES users(user_id)
+user_id int REFERENCES users(user_id),
+username varchar(20)
 )
