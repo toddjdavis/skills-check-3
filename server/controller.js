@@ -47,13 +47,13 @@ module.exports = {
     },
     searchPost: async (req,res) => {
         const db = req.app.get('db')
-        const {post_id} = req.params
-        let selectedPost = await db.get_post(post_id)
-        res.status(200).send(selectedPost)
+        const {id} = req.params
+        let selectedPost = await db.get_post(id)
+        res.status(200).send(selectedPost[0])
     },
     getAllPost: async (req, res) => {
         const db = req.app.get('db')
-        let all = await db.all_posts()
+        let all = await db.all_post()
         res.status(200).send(all)
     }
 }

@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import './App.css';
 import Nav from './components/Nav'
 import routes from './routes'
-import {connect} from 'react-redux'
 
 
 
@@ -17,10 +16,6 @@ class App extends Component {
     );
   }
 }
-function mapStateToProps(state){
-  return{
-    reducer: state.loggedIn
-  }
-}
 
-export default connect()(App);
+
+export default App;

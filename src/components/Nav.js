@@ -22,7 +22,6 @@ class Nav extends Component {
                     <button onClick={this.logout}>Logout</button>
                     <Link to='/dashboard'>Home</Link>
                     <Link to='/form'>New Post</Link>
-                    <Link to='/post'>Other</Link>
                     <span>Hello {this.props.user.username.username}</span>
                 </div>
             )

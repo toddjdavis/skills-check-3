@@ -4,21 +4,10 @@ const initialState = {
     loggedIn: false,
     username: ''
 }
-
-
-// login(){
-//     const{username, password} = this.state
-//     axios.post('/auth/login', {username, password}).then(
-//         () => {
-//             alert('Logged In')
-//             this.setState({username: '', password: ''})
-//         }).catch(error => {alert(error.response.request.response)})
-// }
-
 const REGISTER = 'REGISTER'
 const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
-
+const CREATE = 'CREATE'
 
 export const register = (username, password) => {
     let data = axios.post('/auth/register', {username, password}).then(res => res.data)
@@ -42,6 +31,15 @@ export const logout = () => {
     }
 }
 
+export const create = (title, body, image_url) => {
+    const {username} = initialState
+    let data = axios.post('/api/post', {title,body, image_url, username}).then(res => res.data)
+    return {
+        type: CREATE,
+        payload: data
+    }
+}
+
 
 export default function reducer(state= initialState, action){
     switch(action.type){
@@ -51,6 +49,8 @@ export default function reducer(state= initialState, action){
             return{...state, username: action.payload, loggedIn: true}
         case LOGOUT + '_FULFILLED':
             return{...state,  username: action.payload, loggedIn: false}
+        case CREATE + '_FULFILLED':
+            return{...state, loggedIn:true}
         default:
             return state
     }

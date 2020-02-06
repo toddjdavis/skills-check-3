@@ -19,6 +19,9 @@ app.use(session({
 app.post('/auth/login', controller.login)
 app.post('/auth/register', controller.register)
 app.get('/auth/logout', controller.logout)
+app.post('/api/post', controller.createPost)
+app.get('/api/post/:id', controller.searchPost)
+app.get('/api/posts', controller.getAllPost)
 
 massive(CONNECTION_STRING).then( db => {
     app.set('db', db)
