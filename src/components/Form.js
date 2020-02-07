@@ -17,7 +17,7 @@ function Form(props) {
             <h1>body</h1>
             <textarea value={inputs.body} onChange={(e) => handleInputs({ ...inputs, body: e.target.value })} />
             <h1>Image Url</h1>
-            <input value={inputs.image_url} onChange={(e) => handleInputs({ ...inputs, image_url: e.target.value })} />
+            <input  value={inputs.image_url} onChange={(e) => handleInputs({ ...inputs, image_url: e.target.value })} />
             <button onClick={() => {
                 props.create(inputs.title, inputs.body, inputs.image_url).then(() => 
                 props.history.push('/dashboard'))

@@ -28,9 +28,9 @@ class Post extends Component {
         console.log(this.props)
         const {image_url, body, title, username} = this.state
         return(
-            <div>
+            <div className='post'>
                 <h1>{title}</h1>
-                <img src={image_url} />
+                <img className='post-pic' src={image_url} />
                 <h3>{username}</h3>
                 <span>{body}</span>
             </div>

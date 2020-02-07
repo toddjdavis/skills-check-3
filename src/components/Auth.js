@@ -35,16 +35,21 @@ class Auth extends Component {
         // console.log(this.props.reducer)
         const {username, password} = this.state
         return(
-            <div className='login'>
-                <input onChange={(e) => this.handleChangeUsername(e.target.value)}value={username} placeholder='Username' />
-                <input onChange={(e) => this.handleChangePassword(e.target.value)} value={password} placeholder='Password' />
-                <button onClick={() => {
-                    this.props.register(username, password).then(() => this.check())
-                }}>Register</button>
-                <button onClick={() => {
-                    this.props.login(username, password).then(() => this.check())
-                }}>Login</button>
-                
+            <div className='login-box'>
+                <span>Hello</span>
+                <div className='login'>
+                    <input onChange={(e) => this.handleChangeUsername(e.target.value)}value={username} placeholder='Username' />
+                    <input onChange={(e) => this.handleChangePassword(e.target.value)} value={password} placeholder='Password' />
+                    <div>
+                        <button onClick={() => {
+                            this.props.register(username, password).then(() => this.check())
+                        }}>Register</button>
+                        <button onClick={() => {
+                            this.props.login(username, password).then(() => this.check())
+                        }}>Login</button>
+                    </div>
+                    
+                </div>
             </div>
         )
     }

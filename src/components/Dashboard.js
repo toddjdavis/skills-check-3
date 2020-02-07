@@ -61,10 +61,10 @@ class Dashboard extends Component {
         // console.log(this.state.toggle)
         const posts = this.state.post.map((el)=> {
             return(
-                <div onClick={()=> this.singlePost(el.post_id)} >
+                <div className='posts' onClick={()=> this.singlePost(el.post_id)} >
                     <h2>{el.title}</h2>
                     <h4>{el.username}</h4>
-                    <img src={el.image_url} />
+                    <img className='posts-pic' src={el.image_url} />
                     <span>{el.body}</span>
                 </div>
             )
@@ -73,14 +73,14 @@ class Dashboard extends Component {
             <div>
                 <input value={this.state.input} placeholder='Search by Title' onChange={(e)=> this.searchByTitle(e.target.value)}/>
                 {this.state.toggle ? (<div>
-                <button onClick={this.submitBody}>Submit User</button>
+                <button onClick={this.submitBody}>Submit</button>
                 </div>) : (<div>
-                <button onClick={this.submitTitle}>Submit Title</button>
+                <button onClick={this.submitTitle}>Submit</button>
                 </div>)}
                 <button onClick={this.clear}>Clear</button>
                 <span>My Posts</span>
                 <input type='checkbox' onChange={this.toggleFun}/>
-                <div>{posts}</div>
+                <div className='sorted-posts'>{posts}</div>
             </div>
         )
     }

@@ -2,8 +2,54 @@
   text-align: center;
 }
 
-.login{
-  position: absolute;
-  height: 100%;
-  width: 100%;
+.posts{
+  height: 300px;
+  width: 250px;
+  background-color: bisque;
+  border-radius: 10px;
 }
+
+.post{
+  height: 80vh;
+  width: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: bisque;
+  border-radius: 25px;
+}
+.sorted-posts{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  
+}
+.posts-pic{
+  height: 100px;
+  width: 75px;
+}
+.post-pic{
+  height: 300px;
+  width: 275px;
+}
+
+.login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: blanchedalmond;
+  border-radius: 25px;
+  height: 50vh;
+  width: 50vh;
+  flex-direction: column;
+}
+.login-box{
+  background-color: black;
+  width: 98vw;
+  height: 99vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
