@@ -4,7 +4,7 @@ module.exports = {
     register: async (req, res) =>{
         const db = req.app.get('db')
         const {username, password} = req.body
-        console.log(req.body)
+        // console.log(req.body)
         let userCheck = await db.get_user(username)
         // console.log(userCheck)
         if(userCheck[0]){
@@ -21,7 +21,7 @@ module.exports = {
     login: async (req, res) =>{
         const db = req.app.get('db')
         const {username, password} = req.body
-        console.log(req.body)
+        // console.log(req.body)
         let foundUser = await db.get_user(username)
         let user = foundUser[0]
         if(!user){
@@ -31,7 +31,7 @@ module.exports = {
         if(!authenticated){
             return res.status(403).send('Incorrect Password')
         }
-        req.session.user = {username: user.username}
+        req.session.user = {username: user.username, user_id: user.user_id}
         return res.status(201).send(req.session.user)
     },
     logout: async (req, res) =>{
@@ -40,9 +40,10 @@ module.exports = {
     },
     createPost: async (req, res) => {
         const db = req.app.get('db')
-        const {title, body, image_url, username} = req.body
-        const {user_id} = req.params
-        let newPost = await db.add_post(title, body, image_url, user_id, username)
+        const {title, body, image_url} = req.body
+        const {user_id} = req.session.user
+        // console.log(req.session, req.body)
+        let newPost = await db.add_post(title, body, image_url, user_id)
         res.status(200).send(newPost)
     },
     searchPost: async (req,res) => {
@@ -54,6 +55,22 @@ module.exports = {
     getAllPost: async (req, res) => {
         const db = req.app.get('db')
         let all = await db.all_post()
+        res.status(200).send(all)
+    },
+    getPostByTitle: async(req, res) =>{
+        const db = req.app.get('db')
+        const {input} = req.body
+        console.log(req.body)
+        let all = await db.search_title(input)
+        res.status(200).send(all)
+    },
+    getPostByBody: async(req, res) =>{
+        const db = req.app.get('db')
+        console.log(req.session)
+        const {input} = req.body
+        const {user_id} = req.session.user
+        console.log(input)
+        let all = await db.search_body([input, user_id])
         res.status(200).send(all)
     }
 }

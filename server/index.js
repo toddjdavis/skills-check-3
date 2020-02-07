@@ -22,6 +22,8 @@ app.get('/auth/logout', controller.logout)
 app.post('/api/post', controller.createPost)
 app.get('/api/post/:id', controller.searchPost)
 app.get('/api/posts', controller.getAllPost)
+app.post('/api/search/title', controller.getPostByTitle)
+app.post('/api/search/body', controller.getPostByBody)
 
 massive(CONNECTION_STRING).then( db => {
     app.set('db', db)

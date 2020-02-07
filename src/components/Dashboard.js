@@ -2,11 +2,14 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
 
+
 class Dashboard extends Component {
     constructor(){
         super()
         this.state={
-            post: []
+            post: [],
+            toggle: false,
+            input: ''
         }
     }
 
@@ -19,9 +22,43 @@ class Dashboard extends Component {
     singlePost = (id) => {
         this.props.history.push(`/post/${id}`)
     }
+    toggleFun=()=>{
+        this.setState({
+            toggle: !this.state.toggle
+        })
+    }
+    searchByTitle = (value) => {
+        this.setState({input: value})
+    }
+
+    submitTitle = () => {
+        const{input}=this.state
+        console.log(input)
+        axios.post('/api/search/title', {input}).then(res=>{
+            this.setState({
+                post: res.data
+            })
+        }).catch(err=>console.log(err))
+    }
+    submitBody =()=> {
+        console.log('hit')
+        const{input}=this.state
+        console.log(input)
+        axios.post('/api/search/body', {input}).then(res=>{
+            this.setState({
+                post: res.data
+            })
+        }).catch(err=>console.log(err))
+    }
+    clear =() =>{
+        axios.get('/api/posts').then(results => {
+            this.setState({post: results.data, input: ''})
+        }).catch(err => console.log(err))
+    }
 
     render(){
-        console.log(this.state.post[1])
+        console.log(this.state.post)
+        // console.log(this.state.toggle)
         const posts = this.state.post.map((el)=> {
             return(
                 <div onClick={()=> this.singlePost(el.post_id)} >
@@ -33,7 +70,18 @@ class Dashboard extends Component {
             )
         })
         return(
-            <div>{posts}</div>
+            <div>
+                <input value={this.state.input} placeholder='Search by Title' onChange={(e)=> this.searchByTitle(e.target.value)}/>
+                {this.state.toggle ? (<div>
+                <button onClick={this.submitBody}>Submit User</button>
+                </div>) : (<div>
+                <button onClick={this.submitTitle}>Submit Title</button>
+                </div>)}
+                <button onClick={this.clear}>Clear</button>
+                <span>My Posts</span>
+                <input type='checkbox' onChange={this.toggleFun}/>
+                <div>{posts}</div>
+            </div>
         )
     }
 }

@@ -32,8 +32,8 @@ export const logout = () => {
 }
 
 export const create = (title, body, image_url) => {
-    const {username} = initialState
-    let data = axios.post('/api/post', {title,body, image_url, username}).then(res => res.data)
+    console.log(initialState)
+    let data = axios.post('/api/post', {title, body, image_url}).then(res => res.data)
     return {
         type: CREATE,
         payload: data
